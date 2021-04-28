@@ -4,7 +4,7 @@
 <h3 align="left"> GetDoctor is a complete package of Online Doctor Appointment and Scheduler.It is a very simple process to manage everything, getting appointed with the doctors, and a very easy login process for doctors, assistants, and staff. Additionally, this system is the perfect package for the doctor side, they can set up their own schedule and manage the serial from this site and app 
 </h3>
 <table>
-<th><h4>Features</h4></th>
+<th><h3>Features</h3></th>
 <th><h3> Other Features</h3></th>
 <tr>
 <td>
