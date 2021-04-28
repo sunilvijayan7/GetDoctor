@@ -86,8 +86,6 @@
 <img src="https://raw.githubusercontent.com/sunilvijayan7/GetDoctor/main/Screenshots/Mobile/10.png" width="200" height="400" />
 <img src="https://raw.githubusercontent.com/sunilvijayan7/GetDoctor/main/Screenshots/Mobile/11.png" width="200" height="400" />
 <img src="https://raw.githubusercontent.com/sunilvijayan7/GetDoctor/main/Screenshots/Mobile/12.png" width="200" height="400" />
-<img src="https://raw.githubusercontent.com/sunilvijayan7/GetDoctor/main/Screenshots/Mobile/13.png" width="200" height="400" />
-<img src="https://raw.githubusercontent.com/sunilvijayan7/GetDoctor/main/Screenshots/Mobile/14.png" width="200" height="400" />
 </p>
 
 <h4>Flow</h4>
