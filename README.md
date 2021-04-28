@@ -6,6 +6,7 @@
 <table>
 <th><h3>Features</h3></th>
 <th><h3> Other Features</h3></th>
+  <th></th>
 <tr>
 <td>
 <ul>
@@ -49,7 +50,11 @@
 <li>Favorites Grid & List</li>
 <li>Chat</li>
 <li>Filters</li>
-<li>Search</li>
+  </ul>
+</td>
+  <td>
+  <ul>
+    <li>Search</li>
 <li>Settings</li>
 <li>Checkout</li>
 <li>Scheduled Booking</li>
@@ -62,6 +67,6 @@
 <li>Light & Dark Themes</li>
 <li>Help & Supports</li>
 </ul>
-</td>
+  </td>
 </tr>
 </table>
