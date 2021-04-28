@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "406706045758",
+    "project_id": "getdoctor-34e81",
+    "storage_bucket": "getdoctor-34e81.appspot.com",
+    "firebase_url": "https://getdoctor-34e81-default-rtdb.firebaseio.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:406706045758:android:0bb0e6a7f4e87ad028626f",
+        "android_client_info": {
+          "package_name": "com.endoctor.getdoctor"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "406706045758-bu45q1abruc90akdu2pdeqb03l8plb39.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDyEnZPlAabQjWOxSh8W4D0QmGY5kM9JL0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "406706045758-bu45q1abruc90akdu2pdeqb03l8plb39.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

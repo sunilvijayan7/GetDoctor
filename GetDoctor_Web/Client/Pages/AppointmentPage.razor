@@ -1,0 +1,338 @@
+﻿@page "/AppointmentPage"
+@using GetDoctor.Shared
+@using GetDoctor.Shared.Models
+@inject HttpClient Http
+@using System.Linq
+
+<h1> Get Doctor</h1>
+<hr />
+<table width="100%" style="background:#05163D;color:honeydew">
+    <tr>
+        <td width="20"> </td>
+        <td>
+            <h2> Add New Appointment</h2>
+        </td>
+        <td> </td>
+        <td align="right">
+            <button class="btn btn-info" @onclick="(async () => await AddNewAppointment())">Clear</button>
+        </td>
+        <td width="10"> </td>
+    </tr>
+    <tr>
+        <td colspan="2"></td>
+    </tr>
+</table>
+<hr />
+
+<div class="container">
+    <div class="row">
+
+        <div class="col-4">
+
+            <form>
+                <div class="form-group">
+                    <label for="email">Appointment  Id</label>
+
+                    <input type="text" class="form-control" @bind="TheAppointment.AppointmentId" readonly />
+                </div>
+                <div class="form-group">
+                    <label for="Day">Day:</label>
+
+                    <input type="text" class="form-control" @bind="TheAppointment.Day" placeholder="Appointment day" />
+                </div>
+                <div class="form-group">
+                    <label for="Symptoms">Symptoms:</label>
+                    <input type="text" class="form-control" @bind="TheAppointment.Symptoms" placeholder="Symptoms" />
+                </div>
+
+
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+
+                        <input type="checkbox" class="form-check-input" @bind="TheAppointment.IsVisible" /> Make It Visible ?
+
+                    </label>
+                </div>
+                <button type="button" class="btn btn-success" @onclick="(async () => await AddAppointment())" style="width:220px;">Save</button>
+            </form>
+        </div>
+
+        <div class="col-4">
+
+            <div class="form-group">
+                <label for="Patient">Patient</label>
+                <select value=@ThePatientID @onchange=changethis class="form-control">
+                    <option value="">-- Select Patient --</option>
+                    @foreach (var _ThePatient in ListPatient1)
+                    {
+                        <option value=@_ThePatient.PatientsId>@_ThePatient.FirstName.ToString() </option>
+                    }
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="Doctors">Doctors</label>
+                <select value=@TheDoctorsID @onchange=changethisDoctor class="form-control">
+                    <option value="">-- Select Experience --</option>
+                    @foreach (var _Doctors in ListDoctors1)
+                    {
+
+                        <option value=@_Doctors.DoctorsId>@_Doctors.FirstName.ToString()</option>
+                    }
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="exampleFormControlSelect1">Department</label>
+                <select value=@TheDepartmentID @onchange=changethisDepartment class="form-control">
+                    <option value="">-- Select Department --</option>
+                    @foreach (var _Departmentlist in listDepartment)
+                    {
+
+                        <option value=@_Departmentlist.DepartmentsId>@_Departmentlist.Name.ToString()</option>
+                    }
+                </select>
+            </div>
+
+
+
+        </div>
+
+
+
+        <div class="col-4">
+
+
+            <div class="form-group">
+                <label for="pwd">Is Visible</label>
+                <input type="text" class="form-control" bind="@TheAppointment.IsVisible.ToString()" value="@TheAppointment.IsVisible.ToString()" readonly />
+            </div>
+
+
+            <div class="form-group">
+                <input type="text" hidden class="form-control" bind="@ThePatientID" value="@ThePatientID.ToString()" name="GenderId" />
+            </div>
+
+
+            <div class="form-group">
+                <input type="text" hidden class="form-control" bind="@TheDoctorsID" value="@TheDoctorsID.ToString()" name="TheDoctorsID" />
+
+            </div>
+            <div class="form-group">
+                <input type="text" hidden class="form-control" bind="@TheDepartmentID" value="@TheDepartmentID.ToString()" name="TheDepartmentID" />
+            </div>
+
+        </div>
+
+
+
+
+
+
+    </div>
+
+</div>
+
+
+
+
+<br />
+<table width="100%" style="background:#0A2464;color:honeydew">
+    <tr>
+        <td width="20"> </td>
+        <td>
+            <h2>Appointment Details</h2>
+        </td>
+
+    </tr>
+    <tr>
+        <td colspan="2"></td>
+    </tr>
+</table>
+
+@if (ListDoctor == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>AppointmentId </th>
+                <th>Day</th>
+                <th>Doctors</th>
+                <th>Departments</th>
+                <th>Patients</th>
+                <th>Symptoms</th>
+                <th>Urd</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var _Appointment in ListAppointment)
+            {
+            <tr>
+                <td>@_Appointment.AppointmentId</td>
+                <td>@_Appointment.Day</td>
+                <td>@ListDoctor.Where(x => x.DoctorsId == @_Appointment.DoctorsId).FirstOrDefault().FirstName</td>
+                <td>@listDepartment.Where(x => x.DepartmentsId == @_Appointment.DepartmentsId).FirstOrDefault().Name</td>
+                <td>@ListPatient.Where(x => x.PatientsId == @_Appointment.PatientsId).FirstOrDefault().FirstName</td>
+                <td>@_Appointment.Symptoms</td>
+                <td>@_Appointment.Urd</td>
+
+
+
+
+
+
+
+
+
+                <td><button class="btn btn-primary" @onclick="@(async () => await EditAppointment(_Appointment.AppointmentId))" style="width:110px;">Edit</button></td>
+                <td><button class="btn btn-danger" @onclick="@(async () => await DeleteAppointment(_Appointment.AppointmentId))">Delete</button></td>
+            </tr>
+
+            }
+        </tbody>
+    </table>
+}
+
+@functions {
+
+    int ThePatientName;
+
+    private bool IsAdmin { get; set; } = true;
+
+
+    Appointment [] ListAppointment;
+    Appointment TheAppointment= new Appointment();
+
+
+    Doctors[] ListDoctor;
+    Doctors TheDoctor = new Doctors();
+    List<Doctors> ListDoctors1 { get; set; } = new List<Doctors>() ;
+
+
+    Patients[] ListPatient;
+    Patients ThePatient = new Patients();
+    List<Patients> ListPatient1 { get; set; } = new List<Patients>() ;
+
+
+    string ids = "0";
+    bool showAddrow = false;
+
+
+
+    Departments[] TheDepartment;
+    Departments DepartmentG = new Departments();
+    List<Departments> listDepartment { get; set; } = new List<Departments>() ;
+
+
+
+
+    protected override async Task OnInitializedAsync()
+    {
+
+
+        ListAppointment= await Http.GetJsonAsync<Appointment[]>("/api/Appointments/");
+
+        ListDoctor = await Http.GetJsonAsync<Doctors[]>("/api/Doctors/");
+        ListDoctors1 = ListDoctor.ToList();
+
+        ListPatient = await Http.GetJsonAsync<Patients[]>("/api/Patients/");
+        ListPatient1 = ListPatient.ToList();
+
+        TheDepartment = await Http.GetJsonAsync<Departments[]>("/api/Departments/");
+        listDepartment = TheDepartment.ToList();
+
+    }
+
+    async Task AddNewAppointment()
+    {
+        TheAppointment = new Appointment();
+        TheDoctorsID =0 ;
+        ThePatientID = 0;
+        TheDepartmentID = 0;
+    }
+    // Add New Gender Details Method
+    async Task AddAppointment()
+
+    {
+        TheAppointment.Urd = (System.DateTime.Now).ToShortDateString().ToString();
+        TheAppointment.DepartmentsId = TheDepartmentID;
+        TheAppointment.PatientsId = ThePatientID;
+        TheAppointment.DoctorsId = TheDoctorsID;
+        if (TheAppointment.AppointmentId == 0)
+
+        {
+            await Http.SendJsonAsync(HttpMethod.Post, "/api/Appointments/", TheAppointment);
+
+        }
+        else
+        {
+            await Http.SendJsonAsync(HttpMethod.Put, "/api/Appointments/" + TheAppointment.AppointmentId, TheAppointment);
+        }
+        TheAppointment = new Appointment();
+
+
+        ListAppointment = await Http.GetJsonAsync<Appointment[]>("/api/Appointments/");
+
+    }
+    // Edit Method
+    protected async Task EditAppointment(int AppointmentId)
+    {
+
+        ids = AppointmentId.ToString();
+        ThePatientID = ListAppointment.FirstOrDefault(x => x. AppointmentId== AppointmentId).PatientsId;
+        TheDoctorsID = ListAppointment.FirstOrDefault(x => x.AppointmentId == AppointmentId).DoctorsId;
+        TheDepartmentID= ListAppointment.FirstOrDefault(x => x.AppointmentId == AppointmentId).DepartmentsId;
+
+
+        TheAppointment = await Http.GetJsonAsync<Appointment>("/api/Appointments/" + Convert.ToInt32(AppointmentId));
+    }
+    // Delte Method
+    protected async Task DeleteAppointment(int AppointmentId)
+    {
+        ids = AppointmentId.ToString();
+        await Http.DeleteAsync("/api/Appointments/" + Convert.ToInt32(AppointmentId));
+
+
+        ListAppointment = await Http.GetJsonAsync<Appointment[]>("/api/Appointments/");
+    }
+
+
+
+    string selectedString = "";
+    int ThePatientID;
+    void changethis(UIChangeEventArgs e)
+    {
+        selectedString = e.Value.ToString();
+        ThePatientID=Int32.Parse(selectedString);
+
+    }
+
+    string selectedStringDoctors = "";
+    int TheDoctorsID { get; set; }
+    void changethisDoctor(UIChangeEventArgs e)
+    {
+        selectedStringDoctors = e.Value.ToString();
+ 
+        TheDoctorsID=Int32.Parse(selectedStringDoctors);
+
+    }
+
+
+    string selectedStringDepartment = "";
+    int TheDepartmentID { get; set; }
+    void changethisDepartment(UIChangeEventArgs e)
+    {
+        selectedStringDepartment = e.Value.ToString();
+        TheDepartmentID=Int32.Parse(selectedStringDepartment);
+
+    }
+
+
+
+
+}
+

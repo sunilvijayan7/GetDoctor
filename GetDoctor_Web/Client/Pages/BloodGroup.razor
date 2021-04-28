@@ -1,0 +1,165 @@
+﻿@page "/BloodGroup"
+@using GetDoctor.Shared
+@using GetDoctor.Shared.Models
+@inject HttpClient Http
+@using System.Linq
+
+<h1> Get Doctor</h1>
+<hr />
+<table width="100%" style="background:#05163D;color:honeydew">
+    <tr>
+        <td width="20"> </td>
+        <td>
+            <h2> Add New Blood Group</h2>
+        </td>
+        <td> </td>
+        <td align="right">
+            <button class="btn btn-info" @onclick="(async () => await AddNewBloodG())">Clear</button>
+        </td>
+        <td width="10"> </td>
+    </tr>
+    <tr>
+        <td colspan="2"></td>
+    </tr>
+</table>
+<hr />
+<div class="container">
+
+    <form>
+        <div class="form-group">
+            <label for="GendersId">Id</label>
+
+            <input type="text" class="form-control" @bind="bloodG.BloodGroupsId" readonly />
+        </div>
+        <div class="form-group">
+            <label for="Name">Name</label>
+
+            <input type="text" class="form-control" @bind="bloodG.Name" />
+        </div>
+
+        <div class="form-group" hidden>
+            <label for="IsVisible">IsVisible</label>
+
+            <input type="text" class="form-control" bind="@bloodG.IsVisible.ToString()" value="@bloodG.IsVisible.ToString()" readonly />
+        </div>
+
+        <div class="form-group form-check">
+            <label class="form-check-label">
+                <input type="checkbox" @bind="bloodG.IsVisible" class="form-check-input" />Make It Visible ?
+
+            </label>
+        </div>
+        <button type="button" class="btn btn-success" @onclick="(async () => await AddBlood())" style="width:220px;">Save</button>
+
+    </form>
+</div>
+
+
+<br />
+<table width="100%" style="background:#0A2464;color:honeydew">
+    <tr>
+        <td width="20"> </td>
+        <td>
+            <h2>Blood Details</h2>
+        </td>
+
+    </tr>
+    <tr>
+        <td colspan="2"></td>
+    </tr>
+</table>
+
+@if (Blood == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Blood ID</th>
+                <th>Blood Name</th>
+                <th>Added Time</th>
+                <th>Visible</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var bloods in Blood)
+            {
+                <tr>
+                    <td>@bloods.BloodGroupsId</td>
+                    <td>@bloods.Name</td>
+                    <td>@bloods.Urd</td>
+                    <td>@bloods.IsVisible</td>
+
+
+                    <td><button class="btn btn-primary" @onclick="@(async () => await EditBlood(@bloods.BloodGroupsId))" style="width:110px;">Edit</button></td>
+                    <td><button class="btn btn-danger" @onclick="@(async () => await DeleteBlood(@bloods.BloodGroupsId))">Delete</button></td>
+                </tr>
+
+            }
+        </tbody>
+    </table>
+}
+
+@functions {
+
+    const bool lettera = true;
+    const bool letterb = false;
+    private bool IsAdmin { get; set; } = true;
+    BloodGroups[] Blood;
+
+    BloodGroups bloodG = new BloodGroups();
+
+    string ids = "0";
+    bool showAddrow = false;
+    protected override async Task OnInitializedAsync()
+    {
+        Blood = await Http.GetJsonAsync<BloodGroups[]>("/api/BloodGroups/");
+    }
+
+    async Task AddNewBloodG()
+    {
+        bloodG = new BloodGroups();
+
+    }
+    // Add New Blood Details Method
+    async Task AddBlood()
+
+    {
+        bloodG.Urd = (System.DateTime.Now).ToShortDateString().ToString();
+
+
+        if (bloodG.BloodGroupsId == 0)
+
+        {
+            await Http.SendJsonAsync(HttpMethod.Post, "/api/BloodGroups/", bloodG);
+
+        }
+        else
+        {
+            await Http.SendJsonAsync(HttpMethod.Put, "/api/BloodGroups/" + bloodG.BloodGroupsId, bloodG);
+        }
+        bloodG = new BloodGroups();
+        Blood = await Http.GetJsonAsync<BloodGroups[]>("/api/BloodGroups/");
+    }
+    // Edit Method
+    protected async Task EditBlood(int BloodGroupsId)
+    {
+        ids = BloodGroupsId.ToString();
+
+        bloodG = await Http.GetJsonAsync<BloodGroups>("/api/BloodGroups/" + Convert.ToInt32(BloodGroupsId));
+    }
+    // Delte Method
+    protected async Task DeleteBlood(int BloodGroupsId)
+    {
+        ids = BloodGroupsId.ToString();
+        await Http.DeleteAsync("/api/BloodGroups/" + Convert.ToInt32(BloodGroupsId));
+
+
+        Blood = await Http.GetJsonAsync<BloodGroups[]>("/api/BloodGroups/");
+    }
+
+}  

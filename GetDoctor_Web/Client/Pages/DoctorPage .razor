@@ -1,0 +1,362 @@
+﻿@page "/DoctorPage"
+@using GetDoctor.Shared
+@using GetDoctor.Shared.Models
+@inject HttpClient Http
+@using System.Linq
+
+<h1> Get Doctor</h1>
+<hr />
+<table width="100%" style="background:#05163D;color:honeydew">
+    <tr>
+        <td width="20"> </td>
+        <td>
+            <h2> Add New Patient</h2>
+        </td>
+        <td> </td>
+        <td align="right">
+            <button class="btn btn-info" @onclick="(async () => await AddNewDoctor())">Clear</button>
+        </td>
+        <td width="10"> </td>
+    </tr>
+    <tr>
+        <td colspan="2"></td>
+    </tr>
+</table>
+<hr />
+<div class="container">
+    <div class="row">
+
+        <div class="col-3">
+
+            <form action="/action_page.php">
+                <div class="form-group">
+                    <label for="email">Doctor Id</label>
+
+                    <input type="text" class="form-control" @bind="TheDoctor.DoctorsId" readonly />
+                </div>
+                <div class="form-group">
+                    <label for="First">First Name:</label>
+                    <input type="text" class="form-control" @bind="TheDoctor.FirstName" placeholder="First Name" />
+                </div>
+                <div class="form-group">
+                    <label for="pwd">	Last Name:</label>
+                    <input type="text" class="form-control" @bind="TheDoctor.LastName" placeholder="Last Name" />
+                </div>
+                <div class="form-group">
+                    <label for="pwd">Education</label>
+                    <input type="text" class="form-control" @bind="TheDoctor.Education" placeholder="Education" />
+                </div>
+
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+
+                        <input type="checkbox" @bind="TheDoctor.IsVisible" class="form-check-input" />Make It Visible ?
+                    </label>
+                </div>
+                <button type="button" class="btn btn-success" @onclick="(async () => await AddDoctor())" style="width:220px;">Save</button>
+            </form>
+        </div>
+
+        <div class="col-3">
+
+            <div class="form-group">
+                <label for="Gender">Gender</label>
+                <select value=@TheGenderID @onchange=changethis class="form-control" >
+                    <option value="">-- Select Gender --</option>
+                    @foreach (var _Gender in ListGender1)
+                    {
+                        <option value=@_Gender.GendersId>@_Gender.Name.ToString()</option>
+                    }
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="Experience">Experience</label>
+                <select value=@TheExperienceID @onchange=changethisExperience class="form-control" >
+                    <option value="">-- Select Experience --</option>
+                    @foreach (var _Experiencelist in listExperience)
+                    {
+
+                        <option value=@_Experiencelist.ExperienceId>@_Experiencelist.Name.ToString()</option>
+                    }
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="Department">Department</label>
+                <select value=@TheDepartmentID @onchange=changethisDepartment class="form-control">
+                    <option value="">-- Select Department --</option>
+                    @foreach (var _Departmentlist in listDepartment)
+                    {
+
+                        <option value=@_Departmentlist.DepartmentsId>@_Departmentlist.Name.ToString()</option>
+                    }
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="PhoneNumber">Phone Number:</label>
+                <input type="text" class="form-control" @bind="TheDoctor.PhoneNumber" placeholder="PhoneNumber"/>
+            </div>
+
+        </div>
+
+
+
+        <div class="col-3">
+
+
+
+            <div class="form-group">
+                <label for="Designation">Designation:</label>
+
+                <input type="text" class="form-control" @bind="TheDoctor.Designation" placeholder="Designation"/>
+            </div>
+
+            <div class="form-group">
+                <label for="Email">Email:</label>
+               
+                <input type="text" class="form-control" @bind="TheDoctor.Email" placeholder="Email"/>
+            </div>
+
+            <div class="form-group">
+                <label for="pwd">Is visible:</label>
+                <input type="text" class="form-control" bind="@TheDoctor.IsVisible.ToString()" value="@TheDoctor.IsVisible.ToString()" readonly />
+            </div>
+            <div class="form-group">
+                <input type="text" hidden class="form-control" bind="@TheGenderID" value="@TheGenderID.ToString()" name="GenderId" />
+            </div>
+
+        </div>
+
+
+        <div class="col-3">
+
+
+
+
+            <div class="form-group">
+                <input type="text" hidden class="form-control" bind="@TheExperienceID" value="@TheExperienceID.ToString()" name="TheExperienceID" />
+            </div>
+
+
+            <div class="form-group">
+                <input type="text" class="form-control" hidden bind="@TheDepartmentID" value="@TheDepartmentID.ToString()" name="TheDepartmentID" />
+
+            </div>
+
+        </div>
+
+
+
+    </div>
+
+</div>
+
+
+
+
+
+
+<br />
+<table width="100%" style="background:#0A2464;color:honeydew">
+    <tr>
+        <td width="20"> </td>
+        <td>
+            <h2>Doctors Details</h2>
+        </td>
+
+    </tr>
+    <tr>
+        <td colspan="2"></td>
+    </tr>
+</table>
+
+@if (ListDoctor == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Doctors Id </th>
+                <th>FirstName</th>
+                <th>LastName</th>
+                <th>PhoneNumber</th>
+                <th>Email</th>
+                <th>Education</th>
+                <th>Designation</th>
+                <th>Gender </th>
+                <th>Experience</th>
+                <th>Added Time</th>
+                <th>Visible</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var _Doctor in ListDoctor)
+            {
+            <tr>
+                <td>@_Doctor.DoctorsId</td>
+                <td>@_Doctor.FirstName</td>
+                <td>@_Doctor.LastName</td>
+                <td>@_Doctor.PhoneNumber</td>
+                <td>@_Doctor.Email</td>
+                <td>@_Doctor.Education</td>
+                <td>@_Doctor.Designation</td>
+                @*<td>@_Doctor.GendersId</td>*@
+                <td>@ListGender.Where(x => x.GendersId == @_Doctor.GendersId).FirstOrDefault().Name</td>
+                <td>@listExperience.Where(x => x.ExperienceId == @_Doctor.ExperienceId).FirstOrDefault().Name</td>
+                @*<td>@_Doctor.ExperienceId</td>*@
+                <td>@_Doctor.Urd</td>
+                <td>@_Doctor.IsVisible</td>
+
+
+                <td><button class="btn btn-primary" @onclick="@(async () => await EditDoctor(_Doctor.DoctorsId))" style="width:110px;">Edit</button></td>
+                <td><button class="btn btn-danger" @onclick="@(async () => await DeleteDoctor(_Doctor.DoctorsId))">Delete</button></td>
+            </tr>
+
+            }
+        </tbody>
+    </table>
+}
+
+@functions {
+
+    int TheGenderName;
+
+    private bool IsAdmin { get; set; } = true;
+    Doctors[] ListDoctor;
+    Doctors TheDoctor = new Doctors();
+
+    Genders[] ListGender;
+    Genders TheGender = new Genders();
+
+    string ids = "0";
+    bool showAddrow = false;
+
+    Experience[] TheExperience;
+    Experience ExperienceG = new Experience();
+    List<Experience> listExperience { get; set; } = new List<Experience>() ;
+
+    Departments[] TheDepartment;
+    Departments DepartmentG = new Departments();
+    List<Departments> listDepartment { get; set; } = new List<Departments>() ;
+
+    List<Genders> ListGender1 { get; set; } = new List<Genders>() ;
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        ListDoctor = await Http.GetJsonAsync<Doctors[]>("/api/Doctors/");
+        ListGender = await Http.GetJsonAsync<Genders[]>("/api/Genders/");
+        ListGender1 = ListGender.ToList();
+        TheExperience = await Http.GetJsonAsync<Experience[]>("/api/Experiences/");
+        listExperience = TheExperience.ToList();
+
+        TheDepartment = await Http.GetJsonAsync<Departments[]>("/api/Departments/");
+        listDepartment = TheDepartment.ToList();
+
+        Console.WriteLine(ListGender1);
+    }
+
+    async Task AddNewDoctor()
+    {
+        TheDoctor = new Doctors();
+        TheExperienceID =0 ;
+        TheGenderID = 0;
+        TheDepartmentID = 0;
+    }
+    // Add New Gender Details Method
+    async Task AddDoctor()
+
+    {
+        TheDoctor.Urd = (System.DateTime.Now).ToShortDateString().ToString();
+        TheDoctor.GendersId = TheGenderID;
+        TheDoctor.ExperienceId = TheExperienceID;
+        TheDoctor.DepartmentsId = TheDepartmentID;
+        if (TheDoctor.DoctorsId == 0)
+
+        {
+            await Http.SendJsonAsync(HttpMethod.Post, "/api/Doctors/", TheDoctor);
+
+        }
+        else
+        {
+            await Http.SendJsonAsync(HttpMethod.Put, "/api/Doctors/" + TheDoctor.DoctorsId, TheDoctor);
+             TheExperienceID =0 ;
+             TheGenderID = 0;
+             TheDepartmentID = 0;
+        }
+        TheDoctor = new Doctors();
+
+
+        ListDoctor = await Http.GetJsonAsync<Doctors[]>("/api/Doctors/");
+
+    }
+    // Edit Method
+    protected async Task EditDoctor(int DoctorsId)
+    {
+
+        ids = DoctorsId.ToString();
+        TheGenderID = ListDoctor.FirstOrDefault(x => x.DoctorsId == DoctorsId).GendersId;
+
+        string xx = ListGender.Where(x => x.GendersId == TheGenderID).FirstOrDefault().Name;
+
+        TheExperienceID = ListDoctor.FirstOrDefault(x => x.DoctorsId == DoctorsId).ExperienceId;
+        TheDepartmentID = ListDoctor.FirstOrDefault(x => x.DoctorsId == DoctorsId).DepartmentsId;
+
+
+     
+        TheDoctor = await Http.GetJsonAsync<Doctors>("/api/Doctors/" + Convert.ToInt32(DoctorsId));
+    }
+    // Delte Method
+    protected async Task DeleteDoctor(int DoctorsId)
+    {
+        ids = DoctorsId.ToString();
+        await Http.DeleteAsync("/api/Doctors/" + Convert.ToInt32(DoctorsId));
+
+
+        ListDoctor = await Http.GetJsonAsync<Doctors[]>("/api/Doctors/");
+    }
+
+    string selectedString = "";
+    int TheGenderID;
+    void changethis(UIChangeEventArgs e)
+    {
+        selectedString = e.Value.ToString();
+
+   
+        TheGenderID=Int32.Parse(selectedString);
+
+    }
+
+    string selectedStringExperience = "";
+    int TheExperienceID { get; set; }
+    void changethisExperience(UIChangeEventArgs e)
+    {
+        selectedStringExperience = e.Value.ToString();
+       
+        TheExperienceID=Int32.Parse(selectedStringExperience);
+       
+
+    }
+
+
+    string selectedStringDepartment = "";
+    int TheDepartmentID { get; set; }
+    void changethisDepartment(UIChangeEventArgs e)
+    {
+        selectedStringDepartment = e.Value.ToString();
+      
+        TheDepartmentID=Int32.Parse(selectedStringDepartment);
+        
+
+    }
+
+
+
+
+}
+

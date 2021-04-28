@@ -1,0 +1,305 @@
+﻿@page "/PatientPage"
+@using GetDoctor.Shared
+@using GetDoctor.Shared.Models
+@inject HttpClient Http
+@using System.Linq
+
+<h1> Get Doctor</h1>
+<hr />
+<table width="100%" style="background:#05163D;color:honeydew">
+    <tr>
+        <td width="20"> </td>
+        <td>
+            <h2> Add New Patient</h2>
+        </td>
+        <td> </td>
+        <td align="right">
+            <button class="btn btn-info" @onclick="(async () => await AddNewPatient())">Clear</button>
+        </td>
+        <td width="10"> </td>
+    </tr>
+    <tr>
+        <td colspan="2"></td>
+    </tr>
+</table>
+<hr />
+
+
+<div class="container">
+    <div class="row">
+
+        <div class="col-4">
+
+            <form>
+                <div class="form-group">
+                    <label for="email">Patient Id</label>
+                    <input type="text" class="form-control" @bind="ThePatient.PatientsId" readonly />
+                </div>
+                <div class="form-group">
+                    <label for="Name">	First Name:</label>
+                    <input type="text" class="form-control" @bind="ThePatient.FirstName" placeholder="First Name" />
+                </div>
+                <div class="form-group">
+                    <label for="pwd">	Last Name:</label>
+                    <input type="text" class="form-control" @bind="ThePatient.LastName" placeholder="Last Name" />
+                </div>
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input type="checkbox" @bind="ThePatient.IsVisible" class="form-check-input" />Make It Visible ?
+
+                    </label>
+                </div>
+ 
+                <button type="button" class="btn btn-success" @onclick="(async () => await AddPatient())" style="width:220px;">Save</button>
+            </form>
+        </div>
+
+        <div class="col-4">
+            <div class="form-group">
+                <label for="PhoneNumber">Phone Number:</label>
+              
+                <input type="text" class="form-control" @bind="ThePatient.PhoneNumber" placeholder="PhoneNumber"/>
+            </div>
+            <div class="form-group">
+                <label for="Gender">Gender</label>
+
+                <select value=@TheGenderID @onchange=changethis class="form-control">
+                    <option value="">-- Select Gender --</option>
+                    @foreach (var _Gender in ListGender1)
+                    {
+                        <option value=@_Gender.GendersId>@_Gender.Name.ToString()</option>
+                    }
+                </select>
+
+
+            </div>
+
+            <div class="form-group">
+                <label for="exampleFormControlSelect1">Blood</label>
+                <select value=@TheBloodID @onchange=changethisBlood class="form-control">
+                    <option value="">-- Select BloodGroup --</option>
+                    @foreach (var _bloodlist in listBloodGroups)
+                    {
+
+                        <option value=@_bloodlist.BloodGroupsId>@_bloodlist.Name.ToString()</option>
+                    }
+                </select>
+            </div>
+
+
+
+        </div>
+
+
+
+        <div class="col-4">
+
+
+
+            <div class="form-group">
+                <label for="pwd">Symptoms:</label>
+           
+                <input type="text" class="form-control" @bind="ThePatient.Symptoms" placeholder="Symptoms"/>
+            </div>
+
+            <div class="form-group">
+                <label for="pwd">Is Visible:</label> 
+
+                <input type="text" class="form-control" placeholder="Is Visible" bind="@ThePatient.IsVisible.ToString()" value="@ThePatient.IsVisible.ToString()" readonly />
+            </div>
+
+            <div class="form-group">
+                <input type="text" hidden class="form-control" bind="@TheGenderID" value="@TheGenderID.ToString()" name="GenderId" />
+            </div>
+            <div class="form-group">
+               
+                <input type="text" class="form-control" hidden bind="@TheBloodID" value="@TheBloodID.ToString()" name="TheBloodID" />
+            </div>
+
+        </div>
+
+
+
+
+
+
+    </div>
+
+</div>
+
+
+
+
+<br />
+<table width="100%" style="background:#0A2464;color:honeydew">
+    <tr>
+        <td width="20"> </td>
+        <td>
+            <h2>Patients Details</h2>
+        </td>
+
+    </tr>
+    <tr>
+        <td colspan="2"></td>
+    </tr>
+</table>
+
+@if (ListPatient == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Patients Id </th>
+                <th>FirstName</th>
+                <th>LastName</th>
+                <th>Email</th>
+                <th>Gender </th>
+                <th>BloodGroup</th>
+                <th>Symptoms</th>
+                <th>PhoneNumber</th>
+                <th>Added Time</th>
+                <th>Visible</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var _Patient in ListPatient)
+            {
+                <tr>
+                    <td>@_Patient.PatientsId</td>
+                    <td>@_Patient.FirstName</td>
+                    <td>@_Patient.LastName</td>
+                    <td>@_Patient.Email</td>
+   
+                    <td>@ListGender.Where(x => x.GendersId == @_Patient.GendersId).FirstOrDefault().Name</td>
+                    <td>@listBloodGroups.Where(x => x.BloodGroupsId == @_Patient.BloodGroupsId).FirstOrDefault().Name</td>
+
+                    <td>@_Patient.Symptoms</td>
+                    <td>@_Patient.PhoneNumber</td>
+                    <td>@_Patient.Urd</td>
+                    <td>@_Patient.IsVisible</td>
+
+
+                    <td><button class="btn btn-primary" @onclick="@(async () => await EditPatient(_Patient.PatientsId))" style="width:110px;">Edit</button></td>
+                    <td><button class="btn btn-danger" @onclick="@(async () => await DeletePatient(_Patient.PatientsId))">Delete</button></td>
+                </tr>
+
+            }
+        </tbody>
+    </table>
+}
+
+@functions {
+
+    int TheGenderName;
+
+    private bool IsAdmin { get; set; } = true;
+    Patients[] ListPatient;
+
+    Patients ThePatient = new Patients();
+    Genders[] ListGender;
+
+    Genders TheGender = new Genders();
+    string ids = "0";
+    bool showAddrow = false;
+
+    BloodGroups[] Blood;
+    BloodGroups bloodG = new BloodGroups();
+    List<BloodGroups> listBloodGroups { get; set; } = new List<BloodGroups>();
+ 
+
+    List<Genders> ListGender1 { get; set; } = new List<Genders>();
+  
+
+    protected override async Task OnInitializedAsync()
+    {
+        ListPatient = await Http.GetJsonAsync<Patients[]>("/api/Patients/");
+
+        ListGender = await Http.GetJsonAsync<Genders[]>("/api/Genders/");
+        ListGender1 = ListGender.ToList();
+
+        Blood = await Http.GetJsonAsync<BloodGroups[]>("/api/BloodGroups/");
+        listBloodGroups = Blood.ToList();
+
+
+    }
+
+    async Task AddNewPatient()
+    {
+        ThePatient = new Patients();
+        TheBloodID = 0;
+        TheGenderID = 0;
+    }
+    // Add New Gender Details Method
+    async Task AddPatient()
+
+    {
+        ThePatient.Urd = (System.DateTime.Now).ToShortDateString().ToString();
+        ThePatient.GendersId = TheGenderID;
+        ThePatient.BloodGroupsId = TheBloodID;
+        if (ThePatient.PatientsId == 0)
+
+        {
+            await Http.SendJsonAsync(HttpMethod.Post, "/api/Patients/", ThePatient);
+
+        }
+        else
+        {
+            await Http.SendJsonAsync(HttpMethod.Put, "/api/Patients/" + ThePatient.PatientsId, ThePatient);
+        }
+        ThePatient = new Patients();
+
+
+        ListPatient = await Http.GetJsonAsync<Patients[]>("/api/Patients/");
+
+    }
+    // Edit Method
+    protected async Task EditPatient(int PatientsId)
+    {
+
+        ids = PatientsId.ToString();
+        TheGenderID = ListPatient.FirstOrDefault(x => x.PatientsId == PatientsId).GendersId;
+
+        string xx = ListGender.Where(x => x.GendersId == TheGenderID).FirstOrDefault().Name;
+
+        TheBloodID = ListPatient.FirstOrDefault(x => x.PatientsId == PatientsId).BloodGroupsId;
+
+
+        ThePatient = await Http.GetJsonAsync<Patients>("/api/Patients/" + Convert.ToInt32(PatientsId));
+    }
+    // Delte Method
+    protected async Task DeletePatient(int PatientsId)
+    {
+        ids = PatientsId.ToString();
+        await Http.DeleteAsync("/api/Patients/" + Convert.ToInt32(PatientsId));
+
+
+        ListPatient = await Http.GetJsonAsync<Patients[]>("/api/Patients/");
+    }
+
+    string selectedString = "";
+    int TheGenderID;
+    void changethis(UIChangeEventArgs e)
+    {
+        selectedString = e.Value.ToString();
+
+        TheGenderID = Int32.Parse(selectedString);
+
+    }
+
+    string selectedStringBlood = "";
+    int TheBloodID { get; set; }
+    void changethisBlood(UIChangeEventArgs e)
+    {
+        selectedStringBlood = e.Value.ToString();
+       
+        TheBloodID = Int32.Parse(selectedStringBlood);
+        var selectedBlood = Blood.FirstOrDefault(x => x.BloodGroupsId == TheBloodID);
+
+    }
+
+}
+
