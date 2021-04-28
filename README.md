@@ -70,3 +70,55 @@
   </td>
 </tr>
 </table>
+
+
+<h4> Mobile Screens </h4>
+<p align="center">
+<img src="https://raw.githubusercontent.com/sunilvijayan7/GetDoctor/main/Screenshots/Mobile/1.png" />
+<img src="https://raw.githubusercontent.com/sunilvijayan7/GetDoctor/main/Screenshots/Mobile/2.png" />
+<img src="https://raw.githubusercontent.com/sunilvijayan7/GetDoctor/main/Screenshots/Mobile/3.png" />
+<img src="https://raw.githubusercontent.com/sunilvijayan7/GetDoctor/main/Screenshots/Mobile/4.png" />
+<img src="https://raw.githubusercontent.com/sunilvijayan7/GetDoctor/main/Screenshots/Mobile/5.png" />
+<img src="https://raw.githubusercontent.com/sunilvijayan7/GetDoctor/main/Screenshots/Mobile/6.png" />
+<img src="https://raw.githubusercontent.com/sunilvijayan7/GetDoctor/main/Screenshots/Mobile/7.png" />
+<img src="https://raw.githubusercontent.com/sunilvijayan7/GetDoctor/main/Screenshots/Mobile/8.png" />
+<img src="https://raw.githubusercontent.com/sunilvijayan7/GetDoctor/main/Screenshots/Mobile/9.png" />
+<img src="https://raw.githubusercontent.com/sunilvijayan7/GetDoctor/main/Screenshots/Mobile/10.png" />
+<img src="https://raw.githubusercontent.com/sunilvijayan7/GetDoctor/main/Screenshots/Mobile/11.png" />
+<img src="https://raw.githubusercontent.com/sunilvijayan7/GetDoctor/main/Screenshots/Mobile/12.png" />
+<img src="https://raw.githubusercontent.com/sunilvijayan7/GetDoctor/main/Screenshots/Mobile/13.png" />
+<img src="https://raw.githubusercontent.com/sunilvijayan7/GetDoctor/main/Screenshots/Mobile/14.png" />
+</p>
+
+<h4>Flow</h4>
+<p align="center">
+<img src="https://raw.githubusercontent.com/sunilvijayan7/GetDoctor/main/Flow/Flow.JPG" />
+</p>
+
+<h4>Ideation</h4>
+<p align="center">
+<img src="https://raw.githubusercontent.com/sunilvijayan7/GetDoctor/main/Ideation/1.png" />
+<img src="https://raw.githubusercontent.com/sunilvijayan7/GetDoctor/main/Ideation/2.png" />
+<img src="https://raw.githubusercontent.com/sunilvijayan7/GetDoctor/main/Ideation/3.png" />
+<img src="https://raw.githubusercontent.com/sunilvijayan7/GetDoctor/main/Ideation/4.png" />
+<img src="https://raw.githubusercontent.com/sunilvijayan7/GetDoctor/main/Ideation/5.png" />
+</p>
+
+<h4>Wireframes</h4>
+<p align="center">
+<img src="https://raw.githubusercontent.com/sunilvijayan7/GetDoctor/main/Wireframes/1.jpg" />
+<img src="https://raw.githubusercontent.com/sunilvijayan7/GetDoctor/main/Wireframes/2.jpg" />
+<img src="https://raw.githubusercontent.com/sunilvijayan7/GetDoctor/main/Wireframes/3.jpg" />
+<img src="https://raw.githubusercontent.com/sunilvijayan7/GetDoctor/main/Wireframes/4.jpg" />
+<img src="https://raw.githubusercontent.com/sunilvijayan7/GetDoctor/main/Wireframes/5.jpg" />
+<img src="https://raw.githubusercontent.com/sunilvijayan7/GetDoctor/main/Wireframes/6.jpg" />
+</p>
+
+<h4> Desktop Screens </h4>
+<p align="center">
+<img src="https://raw.githubusercontent.com/sunilvijayan7/GetDoctor/main/Screenshots/Desktop/Appointment.jpg" />
+<img src="https://raw.githubusercontent.com/sunilvijayan7/GetDoctor/main/Screenshots/Desktop/AddNew.jpg" />
+<img src="https://raw.githubusercontent.com/sunilvijayan7/GetDoctor/main/Screenshots/Desktop/Gender.jpg" />
+<img src="https://raw.githubusercontent.com/sunilvijayan7/GetDoctor/main/Screenshots/Desktop/Patient.jpg" />
+</p>
+
