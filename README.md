@@ -74,20 +74,20 @@
 
 <h4> Mobile Screens </h4>
 <p align="center">
-<img src="https://raw.githubusercontent.com/sunilvijayan7/GetDoctor/main/Screenshots/Mobile/1.png" />
-<img src="https://raw.githubusercontent.com/sunilvijayan7/GetDoctor/main/Screenshots/Mobile/2.png" />
-<img src="https://raw.githubusercontent.com/sunilvijayan7/GetDoctor/main/Screenshots/Mobile/3.png" />
-<img src="https://raw.githubusercontent.com/sunilvijayan7/GetDoctor/main/Screenshots/Mobile/4.png" />
-<img src="https://raw.githubusercontent.com/sunilvijayan7/GetDoctor/main/Screenshots/Mobile/5.png" />
-<img src="https://raw.githubusercontent.com/sunilvijayan7/GetDoctor/main/Screenshots/Mobile/6.png" />
-<img src="https://raw.githubusercontent.com/sunilvijayan7/GetDoctor/main/Screenshots/Mobile/7.png" />
-<img src="https://raw.githubusercontent.com/sunilvijayan7/GetDoctor/main/Screenshots/Mobile/8.png" />
-<img src="https://raw.githubusercontent.com/sunilvijayan7/GetDoctor/main/Screenshots/Mobile/9.png" />
-<img src="https://raw.githubusercontent.com/sunilvijayan7/GetDoctor/main/Screenshots/Mobile/10.png" />
-<img src="https://raw.githubusercontent.com/sunilvijayan7/GetDoctor/main/Screenshots/Mobile/11.png" />
-<img src="https://raw.githubusercontent.com/sunilvijayan7/GetDoctor/main/Screenshots/Mobile/12.png" />
-<img src="https://raw.githubusercontent.com/sunilvijayan7/GetDoctor/main/Screenshots/Mobile/13.png" />
-<img src="https://raw.githubusercontent.com/sunilvijayan7/GetDoctor/main/Screenshots/Mobile/14.png" />
+<img src="https://raw.githubusercontent.com/sunilvijayan7/GetDoctor/main/Screenshots/Mobile/1.png"  width="200" height="400"/>
+<img src="https://raw.githubusercontent.com/sunilvijayan7/GetDoctor/main/Screenshots/Mobile/2.png"  width="200" height="400"/>
+<img src="https://raw.githubusercontent.com/sunilvijayan7/GetDoctor/main/Screenshots/Mobile/3.png"  width="200" height="400"/>
+<img src="https://raw.githubusercontent.com/sunilvijayan7/GetDoctor/main/Screenshots/Mobile/4.png"  width="200" height="400"/>
+<img src="https://raw.githubusercontent.com/sunilvijayan7/GetDoctor/main/Screenshots/Mobile/5.png"  width="200" height="400"/>
+<img src="https://raw.githubusercontent.com/sunilvijayan7/GetDoctor/main/Screenshots/Mobile/6.png"  width="200" height="400"/>
+<img src="https://raw.githubusercontent.com/sunilvijayan7/GetDoctor/main/Screenshots/Mobile/7.png"  width="200" height="400"/>
+<img src="https://raw.githubusercontent.com/sunilvijayan7/GetDoctor/main/Screenshots/Mobile/8.png"  width="200" height="400"/>
+<img src="https://raw.githubusercontent.com/sunilvijayan7/GetDoctor/main/Screenshots/Mobile/9.png"  width="200" height="400"/>
+<img src="https://raw.githubusercontent.com/sunilvijayan7/GetDoctor/main/Screenshots/Mobile/10.png" width="200" height="400" />
+<img src="https://raw.githubusercontent.com/sunilvijayan7/GetDoctor/main/Screenshots/Mobile/11.png" width="200" height="400" />
+<img src="https://raw.githubusercontent.com/sunilvijayan7/GetDoctor/main/Screenshots/Mobile/12.png" width="200" height="400" />
+<img src="https://raw.githubusercontent.com/sunilvijayan7/GetDoctor/main/Screenshots/Mobile/13.png" width="200" height="400" />
+<img src="https://raw.githubusercontent.com/sunilvijayan7/GetDoctor/main/Screenshots/Mobile/14.png" width="200" height="400" />
 </p>
 
 <h4>Flow</h4>
@@ -121,4 +121,9 @@
 <img src="https://raw.githubusercontent.com/sunilvijayan7/GetDoctor/main/Screenshots/Desktop/Gender.jpg" />
 <img src="https://raw.githubusercontent.com/sunilvijayan7/GetDoctor/main/Screenshots/Desktop/Patient.jpg" />
 </p>
+<p align="left">
 
+- 💻 All of my projects are available at [http://www.sunilvijayan.com/](http://www.sunilvijayan.com/)
+
+- 📫 How to reach me **hi@sunilvijayan.com/**
+</p>
