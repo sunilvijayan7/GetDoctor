@@ -1,8 +1,10 @@
 # GetDoctor
 
-<h1 align="left"> :blush: :blush: :blush: GetDoctor is a complete app developed in Flutter, Firebase and Blazor,DotNet Core API and SQL Server</h1>
-<h3 align="left"> GetDoctor is a complete package of Online Doctor Appointment and Scheduler.It is a very simple process to manage everything, getting appointed with the doctors, and a very easy login process for doctors,patients, assistants, and staff. Additionally, this system is the perfect package for the doctor side, they can set up their own schedule and manage the serial from this site and app 
-</h3>
+<h2>:blush: :blush: :blush:  https://www.izi.health - IZI Health is an advanced version the getdoctor. Please have a look.</h2>
+
+<h3 align="left">GetDoctor is a complete app developed in Flutter, Firebase and Blazor,DotNet Core API and SQL Server</h3>
+<h4 align="left"> GetDoctor is a complete package of Online Doctor Appointment and Scheduler.It is a very simple process to manage everything, getting appointed with the doctors, and a very easy login process for doctors,patients, assistants, and staff. Additionally, this system is the perfect package for the doctor side, they can set up their own schedule and manage the serial from this site and app 
+</h4>
 <table>
 <th><h3>Features</h3></th>
 <th><h3> Other Features</h3></th>
